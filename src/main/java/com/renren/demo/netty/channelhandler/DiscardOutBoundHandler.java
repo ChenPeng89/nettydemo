@@ -17,6 +17,6 @@ public class DiscardOutBoundHandler extends ChannelOutboundHandlerAdapter {
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
         ReferenceCountUtil.release(msg);
         promise.setSuccess();
-        
+
     }
 }
