@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author : peng.chen5@renren-inc.com
@@ -46,7 +48,7 @@ public class BlockedIODemo {
     }
 
     public void multiThread(){
-
+        Lock lock = new ReentrantLock();
 
     }
 
