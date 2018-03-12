@@ -35,10 +35,12 @@ public class SocketDemo {
                     buffer.clear();
                     buffer.put(info.getBytes());
                     buffer.flip();
-                    while (buffer.hasRemaining()) {
-                        System.out.println(buffer);
-                        socketChannel.write(buffer);
-                    }
+//                    while (buffer.hasRemaining()) {
+//                        System.out.println(buffer);
+//                        socketChannel.write(buffer);
+//                    }
+                    socketChannel.write(buffer);
+
                 }
             }
         } catch (IOException e) {
@@ -144,7 +146,7 @@ public class SocketDemo {
         ServerSocketChannel ssChannel = (ServerSocketChannel)key.channel();
         SocketChannel sc = ssChannel.accept();
         sc.configureBlocking(false);
-        sc.register(key.selector(), SelectionKey.OP_READ,ByteBuffer.allocateDirect(1024));
+        sc.register(key.selector(), SelectionKey.OP_READ | SelectionKey.OP_WRITE,ByteBuffer.allocateDirect(1024));
     }
 
     public static void handleWrite(SelectionKey key) throws IOException {
@@ -164,7 +166,7 @@ public class SocketDemo {
         while (bytesRead > 0) {
             buffer.flip();
             while (buffer.hasRemaining()) {
-                System.out.print((char) buffer.get());
+//                System.out.print((char) buffer.get());
             }
             System.out.println();
             buffer.clear();
